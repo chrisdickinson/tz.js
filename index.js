@@ -2,17 +2,21 @@
   var tz =      typeof TZINFO !== 'undefined' ? TZINFO : require('./tz')
     , is_dst =  typeof is_dst !== 'undefined' ? is_dst : require('dst')
 
-  function find_tz_list(tzoffs) {
+  function get_offset_fmt(tzoffs) {
     var offs = ~~(tzoffs / 60)
-      , mins = ('00' + Math.abs(tzoffs % 60)).slice(-2)
+      , mins = ('00' + ~~Math.abs(tzoffs % 60)).slice(-2)
 
-    offs = ((tzoffs > 0) ? '-' : '+') + ('0' + Math.abs(offs)).slice(-2) + mins
+    offs = ((tzoffs > 0) ? '-' : '+') + ('00' + Math.abs(offs)).slice(-2) + mins
 
-    return tz[offs]
+    return offs
   }
 
-  function tzinfo(date, tz_list, determine_dst) {
-    tz_list = tz_list || find_tz_list(date.getTimezoneOffset())
+  function tzinfo(date, tz_list, determine_dst, TZ) {
+
+    var fmt = get_offset_fmt(date.getTimezoneOffset())
+
+    TZ = TZ || tz
+    tz_list = tz_list || TZ[fmt]
     determine_dst = determine_dst || is_dst
 
     var date_is_dst = determine_dst(date)
@@ -23,22 +27,33 @@
       , filtered = []
 
     if(!is_north)
-      list = slice.reverse()
+      list = list.reverse()
 
     for(var i = 0, len = list.length; i < len; ++i) {
-      if(date_is_dst === /([Dd]aylight|[Ss]ummer)/.test(list[i])) {
+      if(date_is_dst === /([Dd]aylight|[Ss]ummer)/.test(list[i].name)) {
         filtered.push(list[i])
       }
     }
     list = filtered
-    return list[0]
+    if(!list.length) return {}
+
+    return {
+        'name':     list[0].name
+      , 'loc':      list[0].loc
+      , 'abbr':     list[0].abbr
+      , 'offset':   fmt
+    }
   } 
 
-  tzinfo.find_tz_list = find_tz_list
+  tzinfo.get_offset_format = get_offset_fmt
   tzinfo.tz_list = tz
   
   Date.prototype.tzinfo = function() {
     return tzinfo(this)
+  }
+
+  Date.prototype.tzoffset = function() {
+    return 'GMT'+get_offset_fmt(this)
   }
 
   if(typeof module !== undefined)
