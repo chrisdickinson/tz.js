@@ -53,7 +53,7 @@
   }
 
   Date.prototype.tzoffset = function() {
-    return 'GMT'+get_offset_fmt(this)
+    return 'GMT'+get_offset_fmt(this.getTimezoneOffset())
   }
 
   if(typeof module !== undefined)
