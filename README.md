@@ -54,7 +54,14 @@ The ordering of the list is important. Roughly, the algorithm does the following
 
 ## Install (in browser)
 
-Pending.
+````bash
+
+$ git clone git@github.com:chrisdickinson/tz.js.git
+$ cd tz.js
+$ make build
+$ # now you have tz.js, and if you have uglifyjs or jsmin, you also have tz.min.js
+
+````
 
 ## Install (in node)
 
