@@ -56,7 +56,7 @@
     return 'GMT'+get_offset_fmt(this.getTimezoneOffset())
   }
 
-  if(typeof module !== undefined)
+  if(typeof module !== 'undefined')
     module.exports = tzinfo
   else
     window.tzinfo = tzinfo
