@@ -7,6 +7,7 @@ echo "})();" >> tz.js
 echo "adding dst..."
 curl https://raw.github.com/chrisdickinson/dst.js/master/index.js 2>/dev/null >> tz.js
 echo "adding tz..."
+echo ';'>>tz.js
 cat index.js >> tz.js
 COMMAND=
 for i in uglifyjs jsmin NULL; do
