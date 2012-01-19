@@ -1,6 +1,6 @@
 (function() {
   var tz =      typeof TZINFO !== 'undefined' ? TZINFO : require('./tz')
-    , is_dst =  typeof is_dst !== 'undefined' ? is_dst : require('dst')
+    , isDST =   typeof is_dst !== 'undefined' ? is_dst : require('dst')
 
   function get_offset_fmt(tzoffs) {
     var offs = ~~(tzoffs / 60)
@@ -17,7 +17,7 @@
 
     TZ = TZ || tz
     tz_list = tz_list || TZ[fmt]
-    determine_dst = determine_dst || is_dst
+    determine_dst = determine_dst || isDST
 
     var date_is_dst = determine_dst(date)
       , date_dst_thresholds = determine_dst.find_thresholds()
