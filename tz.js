@@ -1,4 +1,4 @@
-{
+module.exports = {
   "+0900": [
     {
       "loc": "Asia", 
