@@ -6,6 +6,11 @@ module.exports = {
       "name": "Japan Standard Time"
     }, 
     {
+      "loc": "Asia", 
+      "abbr": "KST", 
+      "name": "Korea Standard Time"
+    }, 
+    {
       "loc": "Australia", 
       "abbr": "WDT", 
       "name": "Western Daylight Time"
@@ -480,6 +485,11 @@ module.exports = {
     {
       "loc": "North America", 
       "abbr": "HAST", 
+      "name": "Hawaii-Aleutian Standard Time"
+    }, 
+    {
+      "loc": "North America", 
+      "abbr": "HST", 
       "name": "Hawaii-Aleutian Standard Time"
     }, 
     {
