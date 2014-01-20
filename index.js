@@ -27,6 +27,24 @@ function tzinfo(date, tz_list, determine_dst, TZ) {
     , list = (tz_list || []).slice()
     , filtered = []
 
+  var datestroffset = /\((.*?)\)/.exec('' + new Date())
+
+  if(datestroffset) {
+    datestroffset = datestroffset[1]
+
+    for(var i = 0, len = list.length; i < len; ++i) {
+      if(list[i].abbr === datestroffset) {
+        return {
+            'name': list[i].name
+          , 'loc': list[i].loc
+          , 'abbr': list[i].abbr
+          , 'offset': fmt
+        }
+      }
+    }
+  }
+
+
   if(!is_north)
     list = list.reverse()
 
