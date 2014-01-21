@@ -26,7 +26,7 @@ The TZINFO is collected in `tz.json`.
 
 ## How does it work?
 
-Fuzzily. A list of known TZ data is stored in `tz.json`, keyed by offset (`+0000`, `-0600`).
+Fuzzily. A list of known TZ data is stored in `./tz.js`, keyed by offset (`+0000`, `-0600`).
 The ordering of the list is important. Roughly, the algorithm does the following:
 
 * Get the offset string from your date.
